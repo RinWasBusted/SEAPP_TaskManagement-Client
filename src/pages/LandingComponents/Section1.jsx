@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { motion } from 'framer-motion'
 import Section1SmallBlock from './Section1SmallBlock'
-import TaskByGroup from '../TaskByGroup'
+import TaskByGroup from '../../components/TaskByGroup'
 function Section1() {
 
     return (

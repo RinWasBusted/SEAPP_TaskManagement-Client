@@ -2,22 +2,29 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import TaskByGroupHeader from './TaskByGroupHeader'
 import TaskOverview from './TaskOverview'
-function TaskByGroup() {
+function TaskByGroup({
+    width = 670, 
+    height = 500 
+}) {
     return (
-        <div className='w-[670px] h-[500px] rounded-2xl shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black'>
+        <article className={`rounded-2xl flex flex-col items-start justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black`} style={{width , height}}>
             <TaskByGroupHeader />
-            <ul className='w-full py-5 px-8 overflow-y-scroll wrapper max-h-100'>
-                <TaskOverview /> 
-                <TaskOverview /> 
-                <TaskOverview /> 
-                <TaskOverview /> 
-                <TaskOverview /> 
-                <TaskOverview /> 
-                <TaskOverview /> 
-                <TaskOverview /> 
-                <li className="h-6"></li> 
+            <ul className='w-full flex-1 py-5 px-8 overflow-y-scroll overflow-x-hidden wrapper h-full flex flex-col items-center pb-6'>
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <TaskOverview width={609} /> 
+                <li className='h-10'></li>
             </ul>
-        </div>
+        </article>
     )
 }
 export default TaskByGroup
