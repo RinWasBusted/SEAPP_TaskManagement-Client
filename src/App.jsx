@@ -1,11 +1,11 @@
 import './App.css'
-import Landing from './pages/Landing'
-import LoginPage from './pages/LoginPage'
+import LandingPageLayout from './layouts/LandingPageLayout'
+import SignUpPage from './pages/SignUpPage'
 function App() {
 
   return (
     <>
-      <Landing /> 
+      <SignUpPage /> 
     </>
   )
 }
