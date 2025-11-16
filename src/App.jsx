@@ -1,12 +1,12 @@
 import './App.css'
-import LoginPage from './pages/LoginPage'
+import SignUpPage from './pages/SignUpPage'
 import Landing from './pages/Landing'
 import TaskByGroup from './components/TaskByGroup'
 function App() {
 
   return (
     <>
-      <LoginPage /> 
+      <SignUpPage /> 
     </>
   )
 }

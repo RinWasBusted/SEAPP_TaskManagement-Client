@@ -5,6 +5,11 @@ import CTA from '../../components/CTA';
 import Logo from '../../components/Logo';
 import { Checkbox } from '@mui/material';
 
+function handleSignUp()
+{
+
+}
+
 export default function LeftContent()
 {
     return (
@@ -18,34 +23,34 @@ export default function LeftContent()
             </div>
 
             {/* input */}
-            <div className="mt-2 gap-4">
-                <Input title="Full Name" placeholder='Your full name'/>
+            <form className="mt-5" onSubmit={handleSignUp}>
+                <Input title="Full Name" placeholder='Your full name' isRequired={true} name='fullname'/>
                 {/* email */}
-                <Input title="Email Address" placeholder='example@gmail.com' />
+                <Input title="Email Address" placeholder='example@gmail.com' isRequired={true} name='email' isEmail={true}/>
                 {/* password */}
-                <Input title="Password" isPassword='true' placeholder='••••••••'/>
-                <Input title="Confirm Password" isPassword='true' placeholder='••••••••' />
+                <Input title="Password"  placeholder='••••••••' isRequired={true} isPassword={true} name='password'/>
+                <Input title="Confirm Password" placeholder='••••••••' isRequired={true} isPassword={true} name='cfpassword'/>
 
-                <div className="flex items-center text-(--color-primary) font-[Inter] font-medium">
+                <div className="flex items-center text-(--color-primary) font-medium">
                     <Checkbox/>
                     <p className="text-(--color-text)">I agree to <span className='text-(--color-primary)'>Terms of Service</span> and <span className='text-(--color-primary)'>Privacy Policy</span></p>
                 </div>
-            </div>
+                {/* btn */}
+                <div className="mt-3">
+                    <CTA title='Create Account' type='submit'/>
+                    <p className="text-(--color-text) mt-2 text-center">Already have an account? <a href="/" className="text-(--color-primary) font-medium">Sign In</a></p>
+                    <div className="flex mt-4 items-center">
+                        <div className="flex-2 border border-(--color-text-desc) h-px"/>
+                        <p className="flex-1 text-(--color-text) text-center text-[18px]"> OR </p>
+                        <div className="flex-2 border border-(--color-text-desc) h-px"/>
+                    </div>
+            
+                    <div className="mt-4">
+                        <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google"/>
+                    </div>
+                </div>
+            </form>
 
-            {/* btn */}
-            <div className="mt-3">
-                <CTA title='Create Account'/>
-                <p className="text-(--color-text) mt-2 text-center">Already have an account? <a href="/" className="text-(--color-primary) font-medium">Sign In</a></p>
-                <div className="flex mt-4 items-center">
-                    <div className="flex-2 border border-(--color-text-desc) h-px"/>
-                    <p className="flex-1 text-(--color-text) text-center text-[18px]"> OR </p>
-                    <div className="flex-2 border border-(--color-text-desc) h-px"/>
-                </div>
-        
-                <div className="mt-4">
-                    <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google"/>
-                </div>
-            </div>
         </div>
     )
 }
