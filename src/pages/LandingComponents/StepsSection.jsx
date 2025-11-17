@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HeaderPhase from '../HeaderPhase'
-import StepCard from '../StepCard'
-function Section3() {
+import HeaderPhase from '../../components/HeaderPhase'
+import StepCard from '../../components/StepCard'
+function StepsSection() {
     return (
 
         <section className='landing__section bg-[#f8f9fe] relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen py-16'>
@@ -26,4 +26,4 @@ function Section3() {
 
     )
 }
-export default Section3
+export default StepsSection

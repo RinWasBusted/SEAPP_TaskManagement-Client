@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.87);
@@ -14,8 +14,19 @@
   --color-in-progress: #0224FF;
   --color-not-started: #F21E1E;
   --color-completed: #05A301;
+  /*Noi khai bao cac bien mau danh cho lightmode */ 
+  --body-background: white; 
+  --body-color: black; 
+  --link-color: navy; 
 }
-
+[data-theme="dark"] {
+  --body-background: #282c34; 
+  --body-color: white; 
+  --link-color: cyan; 
+}
+* {
+  transition: all 0.3s ease-in-out;
+}
 
 body {
   margin: 0;
@@ -23,10 +34,9 @@ body {
   place-items: center;
 }
 
-
-
-
-
+* {
+  transition: all; 
+}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -36,4 +46,24 @@ body {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Hide native password reveal/clear UI across browsers */
+input[type="password"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Edge / IE */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Blink / WebKit variants (Chrome, Safari) */
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-textfield-decoration-container,
+input[type="password"]::-webkit-textfield-decoration {
+  display: none !important;
 }

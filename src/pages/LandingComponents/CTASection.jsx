@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-function Section5() {
+function CTASection() {
     return (
         <section className='landing__section py-18  bg-[#ff6766] relative 
                         before:bg-[#ff6766] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
@@ -20,4 +20,4 @@ function Section5() {
         </section>
     )
 }
-export default Section5
+export default CTASection

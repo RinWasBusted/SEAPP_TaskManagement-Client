@@ -5,7 +5,7 @@ function TaskByGroupHeader() {
     <div className='h-30 bg-(--color-primary) flex items-center justify-start px-7 py-2 gap-4'>
         <i class="fa-solid fa-ranking-star text-white text-7xl"></i>
         <div className='inline-flex flex-col justify-between gap-3'>
-            <h2 className='text-white text-4xl inline-block font-[Montserrat] font-bold'>Xác suất thống kê</h2>
+            <h2 className='text-white text-[28px] inline-block font-[Montserrat] font-bold'>Xác suất thống kê</h2>
             <div className='flex text-white items-center justify-between gap-3'>
                 <div className='inline-flex items-center gap-1 justify-between'>
                     <i class="fa-solid fa-user-tie"></i>

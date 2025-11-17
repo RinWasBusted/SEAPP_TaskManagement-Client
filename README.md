@@ -29,3 +29,50 @@ Chỉnh sửa lại bố cục của thẻ body và thẻ root (Nếu khởi t�
 `npm install @mui/x-charts`
 ### 5.2. Làm cho phần viền tràn landing page 
 ``
+### 5.3. File layout 
+- Layout là file để các page có thể sử dụng trong trường gợp 1 cấu trúc dược tái sử dụng nhiều lần 
+
+Cách làm file layout: 
+- Tạo một file layout.jsx, hàm đó nhận vào 1 tham số chilren chính là page mà ta muốn hiển thị 
+```js
+function Layout({children}) 
+{
+    return (
+        <Navbar /> 
+            {children} 
+        <Footer />
+    )
+}
+```
+
+- Sau này nếu page nào muốn dùng layout này thì ta gọi Layout và truyền children vào 
+
+```js 
+<Layout>
+    {component....} 
+<Layout />
+```
+
+
+
+## Cách làm lightmode và darkmode 
+B1. Tải cái toggle Button về và viết thêm hàm. Khi button đổi thì set Attribute trong thẻ body lại thành light. Khi button 
+tắt thì set Settribute trong thẻ body lại thành dark 
+
+
+```css
+.for_light_theme {
+  --primary-color: #302ae6; 
+  --secondary-color: #536390; 
+  --font-color: #424242; 
+  --bg-color: #fff; 
+  --heading-color: #292922; 
+}
+.for_dark_theme {
+  --primary-color: #9a97f3; 
+  --secondary-color: #818cab; 
+  --font-color: #e1e1ff; 
+  --bg-color: #161625; 
+  --heading-color: #818cab; 
+}
+```

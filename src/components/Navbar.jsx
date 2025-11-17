@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import { motion } from 'framer-motion'
 import Logo from './Logo'
 
-
-
 function Navbar() {
     return (
         <nav className='w-screen left-0 z-99999 bg-white fixed top-0 shadow-lg h-18 px-[50px] py-8 flex items-center justify-between'>
