@@ -45,24 +45,3 @@
     padding-left: 40px; 
     padding-right: 40px; 
 }
-.group_stastic__total__team {
-    color: #7f7373; 
-}
-
-.group_stastic__total__team .stastic-icon {
-    background-color: #7f7373; 
-}
-.group_stastic__total__task {
-    color: #bd7d7e; 
-} 
-
-.group_stastic__total__task .stastic-icon {
-    background-color: #bd7d7e; 
-} 
-.group_stastic__total_working {
-    color: #109628; 
-}   
-
-.group_stastic__total_working .stastic-icon {
-    background-color: #109628; 
-}   

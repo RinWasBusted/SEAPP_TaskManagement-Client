@@ -35,9 +35,10 @@ function Avatar({
 
     return (
         <div
-            className={`w-[86px] flex relative h-[86px] bg-center bg-cover bg-no-repeat bg-black rounded-full cursor-pointer`}
+            className={`flex relative bg-center bg-cover bg-no-repeat bg-black rounded-full cursor-pointer`}
             style={{
-                backgroundImage: `url(${preview})`
+                backgroundImage: `url(${preview})`,
+                width, height 
             }}
             onClick={handleClick}
         >

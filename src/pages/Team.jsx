@@ -17,9 +17,9 @@ function Team() {
                 
                 <div className='mt-8 border overflow-y-scroll wrapper border-gray-600 rounded-md py-3 px-4 min-h-[700px] w-full'>
                     <div className='w-full flex items-center justify-between gap-3'>
-                        <GroupStastic stasticNumber={7} title='Total Teams' additionalStyle='group_stastic__total__team'/>
-                        <GroupStastic stasticNumber={20} title='Total Tasks' additionalStyle='group_stastic__total__task' />
-                        <GroupStastic stasticNumber={39} title='Working Tasks' additionalStyle='group_stastic__total_working' />
+                        <GroupStastic stasticNumber={7} title='Total Teams' Color='#7f7373'/>
+                        <GroupStastic stasticNumber={20} title='Total Tasks' Color='#bd7d7e' />
+                        <GroupStastic stasticNumber={39} title='Working Tasks' Color='#109628' />
 
                     </div>
                     <div className='my-4 w-full min-h-40 py-8 500 grid grid-cols-12 gap-x-6 gap-y-5'>
