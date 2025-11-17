@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import google from '../assets/google.png';
+
 export default function CTA({
     width = '100%',
     height = 50,

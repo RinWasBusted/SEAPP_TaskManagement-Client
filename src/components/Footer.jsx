@@ -18,13 +18,13 @@ function Footer() {
                     <FooterList />
                 </div>
                 <div className='col-span-2 flex flex-col gap-3 items-start'>
-                    <span className='text-black text-2xl mb-1 font-medium'>Tùy chỉnh</span>
+                    <span className='text-black text-2xl mb-1 font-medium'>Change theme</span>
                     <DarkMode />
                 </div>
             </div>
 
             <div className='w-full flex relative pt-10 pb-7 items-center pl-8 justify-between'>
-                <span className='block text-xl text-black'>2025 NoTask. All rights reserved.</span>
+                <span className='block text-xl text-black'>© 2025 NoTask. All rights reserved.</span>
                 <div className='flex items-center justify-between text-(--color-text-desc) gap-6'>
                     <span className='text-xl'>Privacy Policy</span>
                     <span className='text-xl'>Terms of Services</span>

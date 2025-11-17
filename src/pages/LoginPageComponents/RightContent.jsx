@@ -3,7 +3,13 @@ import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
 import Input from "../../components/Input";
 import CTA from '../../components/CTA';
+import Logo from "../../components/Logo";
 import { Checkbox } from "@mui/material";
+
+function handleLogin()
+{
+
+}
 
 export default function RightContent() {
 
@@ -22,9 +28,7 @@ export default function RightContent() {
     <div className="box-border h-full w-full bg-white px-[100px] pt-[72px]">
       {/* introduction */}
       <div className="font-[Montserrat] leading-tight w-full">
-        <h1 className="text-(--color-primary) font-bold text-[44px]">
-          NoTask
-        </h1>
+        <Logo/>
         <p className="text-(--color-text-desc) font-medium">
           Welcome back! Please sign in to continue
         </p>
@@ -60,7 +64,8 @@ export default function RightContent() {
         <div className="mt-6">
           <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google" />
         </div>
-      </div>
+      </form>
+
     </div>
   );
 }

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.87);
@@ -38,9 +38,6 @@ body {
   transition: all; 
 }
 
-
-
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -49,4 +46,24 @@ body {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Hide native password reveal/clear UI across browsers */
+input[type="password"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Edge / IE */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Blink / WebKit variants (Chrome, Safari) */
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-textfield-decoration-container,
+input[type="password"]::-webkit-textfield-decoration {
+  display: none !important;
 }
