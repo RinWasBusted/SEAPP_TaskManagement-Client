@@ -1,17 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useForm } from 'react-hook-form';
+import { useRef , useState } from 'react';
 import Input from '../../components/Input';
 import CTA from '../../components/CTA';
 import Logo from '../../components/Logo';
 import { Checkbox } from '@mui/material';
-
-function handleSignUp()
-{
-
-}
-
 export default function LeftContent()
 {
+    const formHandleMethod = useForm({
+        mode: 'onChange', 
+        reValidateMode: 'onChange', 
+        criteriaMode: 'all'
+    })
+    const {register , handleSubmit , formState : { errors }} = formHandleMethod 
+    const [logMessages , setLogMessages] = useState([])
+    const checkPolicy = useRef(null) 
+    const onSubmit = (data) => {
+        let chk1 = checkPolicy.current.querySelector('input').checked == false
+        let chk2 = data['Password'] != data['Re-Password']
+        if (chk1) 
+            setLogMessages([
+                ...logMessages, 
+                'Vui lòng đồng ý với điều khoản của chúng tôi'
+            ])
+        if (chk2) 
+            setLogMessages([
+                ...logMessages, 
+                'Mật khảu nhập lại không khớp'
+            ])
+        if (!chk1 && !chk2) setLogMessages([]) //Dat lai thanh mang rong khi khong con loi 
+    }
     return (
         <div className='h-full w-full bg-white px-[100px] pt-5'>
             {/* introduction */}
@@ -23,34 +42,40 @@ export default function LeftContent()
             </div>
 
             {/* input */}
-            <form className="mt-5" onSubmit={handleSignUp}>
-                <Input title="Full Name" placeholder='Your full name' isRequired={true} name='fullname'/>
+            <form className="mt-2 gap-4" onSubmit={handleSubmit(onSubmit)}>
+                <Input title="Full Name" formHandleMethod={formHandleMethod} registerName='Name' />
                 {/* email */}
-                <Input title="Email Address" placeholder='example@gmail.com' isRequired={true} name='email' isEmail={true}/>
+                <Input title="Email Address" formType={'Email'} formHandleMethod={formHandleMethod} validation={true} />
                 {/* password */}
-                <Input title="Password"  placeholder='••••••••' isRequired={true} isPassword={true} name='password'/>
-                <Input title="Confirm Password" placeholder='••••••••' isRequired={true} isPassword={true} name='cfpassword'/>
+                <Input title="Password" formType={'Password'} type='password' formHandleMethod={formHandleMethod} validation={true} />
+                <Input title="Confirm Password" formType={'Password'} type='password' formHandleMethod={formHandleMethod} validation={false} registerName='Re-Password' />
 
                 <div className="flex items-center text-(--color-primary) font-medium">
-                    <Checkbox/>
+                    <Checkbox ref={checkPolicy}/>
                     <p className="text-(--color-text)">I agree to <span className='text-(--color-primary)'>Terms of Service</span> and <span className='text-(--color-primary)'>Privacy Policy</span></p>
                 </div>
-                {/* btn */}
-                <div className="mt-3">
-                    <CTA title='Create Account' type='submit'/>
-                    <p className="text-(--color-text) mt-2 text-center">Already have an account? <a href="/" className="text-(--color-primary) font-medium">Sign In</a></p>
-                    <div className="flex mt-4 items-center">
-                        <div className="flex-2 border border-(--color-text-desc) h-px"/>
-                        <p className="flex-1 text-(--color-text) text-center text-[18px]"> OR </p>
-                        <div className="flex-2 border border-(--color-text-desc) h-px"/>
-                    </div>
-            
-                    <div className="mt-4">
-                        <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google"/>
-                    </div>
-                </div>
+                <CTA title='Create Account'/>
             </form>
-
+            <div className='LogMessage w-full flex my-3 flex-col font-medium text-red-600 text-base italic items-center justify-center gap-2'>
+                {
+                    logMessages.map((logMessage , index) => {
+                        return <p key={index}>{logMessage}</p>
+                    })
+                }
+            </div>
+            {/* btn */}
+            <div className="mt-3">
+                <p className="text-(--color-text) mt-2 text-center">Already have an account? <a href="/" className="text-(--color-primary) font-medium">Sign In</a></p>
+                <div className="flex mt-4 items-center">
+                    <div className="flex-2 border border-(--color-text-desc) h-px"/>
+                    <p className="flex-1 text-(--color-text) text-center text-[18px]"> OR </p>
+                    <div className="flex-2 border border-(--color-text-desc) h-px"/>
+                </div>
+        
+                <div className="mt-4">
+                    <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google"/>
+                </div>
+            </div>
         </div>
     )
 }
