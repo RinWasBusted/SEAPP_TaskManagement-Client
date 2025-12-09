@@ -23,6 +23,7 @@ function CreateTeam() {
     const [image, setImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
     const [showLog, setShowLog] = useState(0); //Truyen nguyen cai nay vao ben trong showLog
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const queryClient = useQueryClient();
     const createTeamMutation = useMutation({
         mutationFn: async ({
@@ -75,7 +76,7 @@ function CreateTeam() {
         mode: "onSubmit",
     });
     const onSubmit = async (data) => {
-        
+        setIsSubmitting(true);
         createTeamMutation.mutate({
             name: data.teamName, 
             icon : image, 
@@ -196,21 +197,12 @@ function CreateTeam() {
                         </div>
                     </form>
                     <div className="flex bg-(--color-background-2) px-5 pt-5 pb-5 border-t border-t-gray-600 items-center justify-end gap-5 w-full h-20">
+                        
                         <motion.button
-                            className="font-md text-black cursor-pointer text-lg md:text-2xl bg-gray-200 rounded-md md:rounded-2xl px-4 md:px-8 md:py-3 py-2"
+                            className={`font-md text-white ${isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} text-lg md:text-2xl bg-(--color-primary) rounded-md md:rounded-2xl px-4 md:px-10 py-2 md:py-3`}
                             initial={{ scale: 1 }}
-                            whileHover={{ scale: 1.05 }}
-                            transition={{
-                                duration: 0.2,
-                                ease: "easeInOut",
-                                transition: "all",
-                            }}>
-                            Cancel
-                        </motion.button>
-                        <motion.button
-                            className="font-md text-white cursor-pointer text-lg md:text-2xl bg-(--color-primary) rounded-md md:rounded-2xl px-4 md:px-10 py-2 md:py-3"
-                            initial={{ scale: 1 }}
-                            whileHover={{ scale: 1.05 }}
+                            disabled={isSubmitting}
+                            whileHover={isSubmitting ? {} : {scale: 1.05}}
                             transition={{
                                 duration: 0.2,
                                 ease: "easeInOut",
@@ -218,7 +210,7 @@ function CreateTeam() {
                             }}
                             type="submit"
                             form="create-team-form">
-                            Create Team
+                            {isSubmitting ? "Processing..." : "Create Team"}
                         </motion.button>
                     </div>
                 </div>
