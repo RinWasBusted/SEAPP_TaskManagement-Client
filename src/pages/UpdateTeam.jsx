@@ -49,7 +49,7 @@ function UpdateTeam() {
             : "<p>Describe your team...</p>",
         editorProps: {
             attributes: {
-                class: "text-sm md:text-[18px] h-42 md:h-47 overflow-y-scroll w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5",
+                class: "text-sm md:text-[18px] h-42 md:h-47 overflow-y-scroll w-full border border-[#757070] text-(--color-text) bg-(--color-block-item-2) font-md rounded-[10px] py-3 px-3 md:px-5",
             },
         },
     });
@@ -77,7 +77,6 @@ function UpdateTeam() {
             return responseData;
         },
         onSuccess: async (responseData) => {
-            console.log(responseData);
             await queryClient.invalidateQueries(["teams"]);
             setShowLog(1);
         },
@@ -112,10 +111,10 @@ function UpdateTeam() {
             <div className="w-full h-auto md:px-2 px-3 lg:px-0 pb-20">
                 <div className="w-full flex items-center justify-between mb-10">
                     <div>
-                        <h2 className="font-md text-2xl md:text-4xl leading-[34px]">
+                        <h2 className="font-md text-2xl md:text-4xl leading-[34px] text-(--color-text)">
                             Update Team
                         </h2>
-                        <span className="font-md text-base md:text-xl block mt-1 md:mt-3">
+                        <span className="font-md text-base md:text-xl block mt-1 md:mt-3 text-(--color-text)">
                             Update your team information below
                         </span>
                     </div>
@@ -147,25 +146,25 @@ function UpdateTeam() {
                         </div>
 
                         <div>
-                            <h3 className="font-md text-lg md:text-xl mb-2">
+                            <h3 className="font-md text-lg md:text-xl mb-2 text-(--color-text)">
                                 Team name
                             </h3>
                             <input
-                                className="text-sm md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5"
+                                className="text-sm md:text-[18px] text-(--color-text) h-10 md:h-12 w-full border border-[#757070] bg-(--color-block-item-2) font-md rounded-[10px] py-3 px-3 md:px-5"
                                 placeholder="Enter team name"
                                 {...register("teamName", {
                                     required: "Team name is required",
                                 })}
                             />
                             {errors.teamName && (
-                                <p className="text-red-600 md:text-lg italic font-medium text-base">
+                                <p className="text-red-400 md:text-lg italic font-medium text-base">
                                     {errors.teamName.message}
                                 </p>
                             )}
                         </div>
 
                         <div>
-                            <h3 className="font-md text-lg md:text-xl mb-2">
+                            <h3 className="font-md text-lg md:text-xl mb-2 text-(--color-text)">
                                 Description
                             </h3>
                             <EditorContent editor={editor} />

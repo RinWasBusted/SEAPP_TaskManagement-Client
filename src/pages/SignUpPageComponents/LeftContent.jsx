@@ -14,7 +14,14 @@ import RegisterServices from '../../services/register'
 import MessageLog from "../../components/MessageLog";
 import checkLogin from "../../services/checkLogin";
 import Spinner from "../../components/Spinner";
+import useSound from "use-sound";
+import { loginGoogleSuccess } from "../../services/loginGoogle";
+import Cookies from "js-cookie";
 export default function LeftContent() {
+    const soundUrl = 'sound/pop.mp3'
+    const [play] = useSound(soundUrl , {
+        volume: 0.4 
+    })
     const formHandleMethod = useForm({
         mode: "onSubmit",
         reValidateMode: "onSubmit",
@@ -26,6 +33,7 @@ export default function LeftContent() {
         formState: { errors },
     } = formHandleMethod;
     const [registered, setRegistered] = useState(false);
+    const [isLogin , setIsLogin] = useState(false) 
     const [logMessages, setLogMessages] = useState([]);
     const checkPolicy = useRef(null);
     const [showLog, setShowLog] = useState(0);
@@ -82,20 +90,54 @@ export default function LeftContent() {
         }
     }, [registered]);
 
-    const login = useGoogleLogin({
-        onSuccess: async (tokenResponse) => {
-            const userInfo = await axios
-                .get("https://www.googleapis.com/oauth2/v3/userinfo", {
-                    headers: {
-                        Authorization: `Bearer ${tokenResponse.access_token}`,
-                    },
-                })
-                .then((res) => res.data);
 
-            console.log("Log ra tu trang LeftContent Sign up");
-            console.log("Thong tin nguoi dung", userInfo);
+    const login = useGoogleLogin({
+        //Tao them code de ngan chan nguoi khac login them tai khoan vao
+        onSuccess: async (tokenResponse) => {
+            if (checkLogin()) {
+                alert("Vui lòng đăng xuất trước khi sử dụng lại dịch vụ");
+                return;
+            }
+            setLoading(true);
+            try {
+                setLoading(true);
+                const responseData = await loginGoogleSuccess(tokenResponse);
+                // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
+                setShowLog(2); //Tien hanh in ra Log message
+                Cookies.set("user", responseData.data.token, {
+                    secure: true,
+                    expires: 7,
+                }); //Tien hanh luu JWT token vao trong storage
+                // console.log("Da luu token vao trong storage");
+
+                
+                setIsLogin(true);
+            } catch (error) {
+                setShowLog(-1);
+                if (error.response?.status == 400) console.log("Bad Request");
+                if (error.response?.status == 401)
+                    console.log("Unauthorized");
+                if (error.response?.status == 403) console.log("Forbidden");
+            }
+            finally{
+                setLoading(false);
+            }
         },
+        onError: (error) => {
+            setShowLog(-1);
+            setLoading(false);
+        },
+        flow: "auth-code",
+        scope: "openid email profile",
     });
+    useEffect(() => {
+        if (isLogin) {
+            const timeOutID = setTimeout(() => {
+                navigate("/app/dashboard");
+            }, 4000); //Chuyen dia diem sau 4000s
+            return () => clearTimeout(timeOutID);
+        }
+    }, [isLogin]);
     return (
         <div className="h-full w-full relative bg-(--color-background-1) px-6 md:px-[100px] pt-10 md:pt-15 pb-10">
             {/* Go back home */}
@@ -147,7 +189,7 @@ export default function LeftContent() {
                 />
 
                 <div className="flex items-center text-(--color-primary) font-medium mb-3">
-                    <Checkbox ref={checkPolicy} />
+                    <Checkbox ref={checkPolicy} onChange={play} />
                     <p className="text-(--color-text)">
                         I agree to{" "}
                         <span className="text-(--color-primary)">
@@ -192,7 +234,7 @@ export default function LeftContent() {
                         color="#403D3D"
                         border="true"
                         icon="google"
-                        action={login}
+                        action={() => login()}
                     />
                 </div>
             </div>
@@ -203,7 +245,7 @@ export default function LeftContent() {
                 showLog={showLog}
                 setShowLog={setShowLog}
                 message={
-                    showLog == 1 ? "Plaease your email !!!" : "Đăng ký thất bại"
+                    showLog == 1 ? "Plaease your email !!!" : (showLog == 2? "Đăng nhập thành công" : "Đăng ký thất bại") 
                 }
             />
         </div>

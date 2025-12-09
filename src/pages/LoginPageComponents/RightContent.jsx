@@ -17,6 +17,7 @@ import LoadingHandle from "../../services/loadingHandle";
 import MessageLog from "../../components/MessageLog";
 import Cookies from "js-cookie";
 import checkLogin from "../../services/checkLogin";
+import useSound from "use-sound";
 export default function RightContent() {
     const formHandleMethod = useForm({
         mode: "onSubmit",
@@ -27,6 +28,9 @@ export default function RightContent() {
     const [isLoading, setIsLoading] = useState(false); //Bien isLoading
     const [showLog, setShowLog] = useState(0); //Bien dung de nhay messageLog, ban dau ca 2 deu dat la false vi khong co gi de tai
     const [isLogin, setIsLogin] = useState(false);
+    const [play] = useSound('sound/pop.mp3' , {
+        volume: 0.5 
+    })
     const navigate = useNavigate();
     const {
         handleSubmit,
@@ -41,7 +45,6 @@ export default function RightContent() {
         try {
             const { Email, Password } = data; //Du lieu tra ve
             setIsLoading(true) 
-            console.log("Email:", Email, "Password:", Password)
             const responseData = await api.post("/auth/login", {
                 email: Email,
                 password: Password,
@@ -79,10 +82,8 @@ export default function RightContent() {
             try {
                 setIsLoading(true);
                 const responseData = await loginGoogleSuccess(tokenResponse);
-                console.log("responseData", responseData) 
                 // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
                 setShowLog(true); //Tien hanh in ra Log message
-                console.log("Token response from data",responseData.data.token)
                 Cookies.set("user", responseData.data.token, {
                     secure: true,
                     expires: 7,
@@ -172,7 +173,7 @@ export default function RightContent() {
                 </div>
 
                 <div className="flex items-center text-(--color-text) font-[Inter] font-medium mb-5">
-                    <Checkbox style={{color: 'var(--color-text)'}}/>
+                    <Checkbox style={{color: 'var(--color-text)'}} onChange={play}  />
                     <p className="text-(--color-text)">Remember me</p>
                    
                         <Link className="ml-auto cursor-pointer hover:underline" to={'/forgot-password'}>Forgot password?</Link>
